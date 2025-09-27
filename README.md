@@ -1,50 +1,171 @@
-# Welcome to your Expo app 👋
+# Clase 1 — Notas
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Índice (Clase 1)**
 
-## Get started
+- [Pasos básicos para iniciar el proyecto / SETUP](#pasos-básicos-para-iniciar-el-proyecto--setup)
+- [Ejemplo de rutas (navegación entre pantallas)](#ejemplo-de-rutas-navegación-entre-pantallas)
+- [Ejemplo de estilos](#ejemplo-de-estilos)
+- [Fin de las notas iniciales](#fin-de-las-notas-iniciales)
 
-1. Install dependencies
+## Pasos básicos para iniciar el proyecto / SETUP
 
-   ```bash
-   npm install
+En la carpeta: instala Node.js de tal forma que cada proyecto pueda usar su propia versión.
+
+1. Instalar NVM (para controlar versiones)
+
+   Sigue la guía oficial e instala/exporta las variables:
+
+   ```shell
+   # Instrucciones y enlace
+   https://github.com/nvm-sh/nvm#installing-and-updating
    ```
 
-2. Start the app
+2. Instalar la versión de Node que quieras usar en el proyecto
 
-   ```bash
-   npx expo start
+   ```shell
+   echo "lts/iron" > .nvmrc  # o la versión que uses, p. ej. 18.0.0
+   # con `nvm use` se usará lo definido en ese archivo
+   nvm use
    ```
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Crear la aplicación
 
 ```bash
-npm run reset-project
+npx create-expo-app califica-taxi
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+> Nota: los paréntesis en los nombres de carpetas/archivos indican grupos en la estructura de rutas (ej.: `(tabs)`).
 
-## Learn more
+## Distribusción de componentes
 
-To learn more about developing your project with Expo, look at the following resources:
+Para revisar la forma de distribuir los componentes (flexbox):
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
-## Join the community
+Flex viene por defecto en React Native.
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## navegación entre pantallas
+
+```ts
+import { useRouter } from "expo-router";
+import { Button } from "react-native";
+
+// Screen1
+export default function Screen1() {
+  const router = useRouter();
+  return (
+    // ...
+    <Button title="Ir a 2" onPress={() => router.push("/screen2")} />
+    // ...
+  );
+}
+
+// Screen2
+export default function Screen2() {
+  return (
+    // ...
+    <Button title="Screen 2 - Volver" onPress={() => router.back()} />
+    // ...
+  );
+}
+```
+
+---
+
+## Estilos
+
+```ts
+import { StyleSheet, View, Text } from "react-native";
+
+export default function Screen1() {
+  // ...
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Hola</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    // ...
+  },
+  text: {
+    color: "#cecece",
+    fontSize: 20,
+  },
+});
+```
+
+## Style components
+
+Es apra reutilizar los estilos web
+
+```shell
+ npm i styled-components
+```
+
+\*\* Se esta como creando un nuevo tag Title que hereda de text
+
+```ts
+...
+import styled from "styled-components/native";
+
+export default function Screen1() {
+  return (
+    ...
+      <Title>Holaaa</Title>
+    ...
+  );
+}
+
+const Title = styled.Text`
+  color: #cecece;
+  font-size: 20;
+`;
+
+```
+
+## Thema
+
+Para agregar un tema
+
+```ts
+...
+import { Colors } from "../styles/themes";
+
+export default function Screen1() {
+  ...
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const toggleTheme = () => {
+    setIsDarkTheme((prevTheme) => !prevTheme);
+  };
+  const currentTheme = isDarkTheme ? Colors.dark1 : Colors.light1;
+
+  return (
+    <ThemeProvider theme={currentTheme}>
+        ...
+    </ThemeProvider>
+  );
+}
+
+const Container = styled.View`
+ ...
+  background-color: ${({ theme }) => theme.background};
+`;
+
+```
+
+### Cambios puntuales para arreglar el error de `theme.background`
+
+- Añadido `types/styled.d.ts` con una declaración que extiende `DefaultTheme` (module augmentation) para `styled-components` y `styled-components/native`.
+  - Se declararon las propiedades usadas en el proyecto: `primary`, `text`, `background`, `tint`, `icon`, `tabIconDefault`, `tabIconSelected`.
+- Actualizado `tsconfig.json` para incluir `"**/*.d.ts"` en el array `include`, de modo que TypeScript cargue el archivo de declaraciones.
+- Reiniciar el servidor de TypeScript (en VS Code: "TypeScript: Restart TS Server") o reiniciar el bundler para que los cambios surtan efecto en el editor/compilación.
+- Nota: en tiempo de ejecución el objeto `theme` ya contenía `background` (en `styles/themes.tsx`); este ajuste sólo solucionó la verificación estática (TypeScript) para evitar el error `Property 'background' does not exist on type 'DefaultTheme'`.
+
+---
+
+_Fin de las notas iniciales._
