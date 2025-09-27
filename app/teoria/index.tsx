@@ -2,9 +2,9 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { ScrollView } from "react-native";
 import { styled, ThemeProvider } from "styled-components/native";
-import { Colors } from "../styles/themes";
+import { Colors } from "../../styles/themes";
 
-import imagenLogo from "../assets/images/favicon.png";
+import imagenLogo from "../../assets/images/favicon.png";
 
 export default function Screen1() {
   const router = useRouter();
@@ -15,7 +15,7 @@ export default function Screen1() {
     <ThemeProvider theme={currentTheme}>
       <ScrollView>
         <Container>
-          <Imagen source={require("../assets/images/icon.png")} />
+          <Imagen source={require("../../assets/images/icon.png")} />
           <Imagen source={imagenLogo} />
           <TextEntrada
             keyboardType="numeric"

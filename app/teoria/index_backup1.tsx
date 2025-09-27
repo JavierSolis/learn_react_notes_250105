@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Button, TouchableHighlight } from "react-native";
 import { styled, ThemeProvider } from "styled-components/native";
-import { Colors } from "../styles/themes";
+import { Colors } from "../../styles/themes";
 
 export default function Screen1_Backup_1() {
   const router = useRouter();
