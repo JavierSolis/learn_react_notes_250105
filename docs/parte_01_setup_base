@@ -199,3 +199,31 @@ export default function Screen1() {
 }
 
 ```
+
+## Imagenes
+
+https://youtu.be/GaXEzkDs6Yk?t=5301
+
+```ts
+import { Image } from "react-native";
+import imagenLogo from "../assets/images/favicon.png";
+
+...
+
+export default function Screen1() {
+  ...
+  return (
+    ...
+        <Imagen source={require("../assets/images/icon.png")} />
+        <Imagen source={imagenLogo} />
+
+    ...
+  );
+}
+
+const Imagen = styled.Image`
+  width: 100px;
+  height: 100px;
+`;
+...
+```
