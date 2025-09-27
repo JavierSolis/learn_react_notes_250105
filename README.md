@@ -3,8 +3,13 @@
 **Índice (Clase 1)**
 
 - [Pasos básicos para iniciar el proyecto / SETUP](#pasos-básicos-para-iniciar-el-proyecto--setup)
-- [Ejemplo de rutas (navegación entre pantallas)](#ejemplo-de-rutas-navegación-entre-pantallas)
-- [Ejemplo de estilos](#ejemplo-de-estilos)
+- [Crear la aplicación](#crear-la-aplicación)
+- [Distribución de componentes](#distribución-de-componentes)
+- [Navegación entre pantallas](#navegación-entre-pantallas)
+- [Estilos](#estilos)
+- [Style components](#style-components)
+- [Thema](#thema)
+- [Cambios puntuales para arreglar el error de `theme.background`](#cambios-puntuales-para-arreglar-el-error-de-themebackground)
 - [Fin de las notas iniciales](#fin-de-las-notas-iniciales)
 
 ## Pasos básicos para iniciar el proyecto / SETUP
@@ -165,7 +170,3 @@ const Container = styled.View`
 - Actualizado `tsconfig.json` para incluir `"**/*.d.ts"` en el array `include`, de modo que TypeScript cargue el archivo de declaraciones.
 - Reiniciar el servidor de TypeScript (en VS Code: "TypeScript: Restart TS Server") o reiniciar el bundler para que los cambios surtan efecto en el editor/compilación.
 - Nota: en tiempo de ejecución el objeto `theme` ya contenía `background` (en `styles/themes.tsx`); este ajuste sólo solucionó la verificación estática (TypeScript) para evitar el error `Property 'background' does not exist on type 'DefaultTheme'`.
-
----
-
-_Fin de las notas iniciales._
