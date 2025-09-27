@@ -227,3 +227,40 @@ const Imagen = styled.Image`
 `;
 ...
 ```
+
+# ScrollView e Input
+
+\*\* el keyboard type no restringe sino que valida en caso ser formulario
+
+```ts
+import { ScrollView } from "react-native";
+...
+
+export default function Screen1() {
+  return (
+    <ThemeProvider theme={currentTheme}>
+      <ScrollView>
+        <Container>
+          ...
+          <TextEntrada
+            keyboardType="numeric"
+            placeholder="Ingrese su numero aquí"
+          ></TextEntrada>
+        </Container>
+      </ScrollView>
+    </ThemeProvider>
+  );
+}
+
+const TextEntrada = styled.TextInput`
+  height: 40px;
+  border-color: gray;
+  border-width: 1px;
+  width: 80%;
+  margin-top: 20px;
+  padding: 10px;
+  color: #151313ff;
+  background-color: #ffffff;
+`;
+
+```
