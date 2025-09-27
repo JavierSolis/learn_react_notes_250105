@@ -1,16 +1,18 @@
-# Clase 1 — Notas
+# Parte 01 — Notas
 
-**Índice (Clase 1)**
+**Índice**
 
-- [Pasos básicos para iniciar el proyecto / SETUP](#pasos-básicos-para-iniciar-el-proyecto--setup)
-- [Crear la aplicación](#crear-la-aplicación)
-- [Distribución de componentes](#distribución-de-componentes)
-- [Navegación entre pantallas](#navegación-entre-pantallas)
-- [Estilos](#estilos)
-- [Style components](#style-components)
-- [Thema](#thema)
-- [Cambios puntuales para arreglar el error de `theme.background`](#cambios-puntuales-para-arreglar-el-error-de-themebackground)
-- [Fin de las notas iniciales](#fin-de-las-notas-iniciales)
+1. [Pasos básicos para iniciar el proyecto / SETUP](#pasos-básicos-para-iniciar-el-proyecto--setup)
+2. [Crear la aplicación](#crear-la-aplicación)
+3. [Distribución de componentes](#distribución-de-componentes)
+4. [Navegación entre pantallas](#navegación-entre-pantallas)
+5. [Estilos](#estilos)
+6. [Style components](#style-components)
+7. [Thema](#thema)<br>7.1 [Cambios puntuales para arreglar el error de `theme.background`](#cambios-puntuales-para-arreglar-el-error-de-themebackground)
+8. [Touchable](#touchable)
+9. [Imágenes](#imágenes)
+10. [ScrollView e Input](#scrollview-e-input)
+11. [Fin de las notas iniciales](#fin-de-las-notas-iniciales)
 
 ## Pasos básicos para iniciar el proyecto / SETUP
 
@@ -41,7 +43,7 @@ npx create-expo-app califica-taxi
 
 > Nota: los paréntesis en los nombres de carpetas/archivos indican grupos en la estructura de rutas (ej.: `(tabs)`).
 
-## Distribusción de componentes
+## Distribución de componentes
 
 Para revisar la forma de distribuir los componentes (flexbox):
 
@@ -51,7 +53,7 @@ Flex viene por defecto en React Native.
 
 ---
 
-## navegación entre pantallas
+## Navegación entre pantallas
 
 ```ts
 import { useRouter } from "expo-router";
@@ -106,13 +108,13 @@ const styles = StyleSheet.create({
 
 ## Style components
 
-Es apra reutilizar los estilos web
+Es para reutilizar los estilos web
 
 ```shell
  npm i styled-components
 ```
 
-\*\* Se esta como creando un nuevo tag Title que hereda de text
+\*\* Se está creando un nuevo tag Title que hereda de Text
 
 ```ts
 ...
@@ -128,7 +130,7 @@ export default function Screen1() {
 
 const Title = styled.Text`
   color: #cecece;
-  font-size: 20;
+  font-size: 20px;
 `;
 
 ```
@@ -200,7 +202,7 @@ export default function Screen1() {
 
 ```
 
-## Imagenes
+## Imágenes
 
 https://youtu.be/GaXEzkDs6Yk?t=5301
 
@@ -228,7 +230,7 @@ const Imagen = styled.Image`
 ...
 ```
 
-# ScrollView e Input
+## ScrollView e Input
 
 \*\* el keyboard type no restringe sino que valida en caso ser formulario
 
