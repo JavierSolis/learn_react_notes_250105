@@ -20,24 +20,30 @@ const Contenedor = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: #767fa3ff;
 `;
 const Title = styled.Text`
-  font-size: 20px;
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 5px;
 `;
 const Subtitle = styled.Text`
   font-size: 10px;
+  color: white;
 `;
 
 const StartButton = styled.TouchableOpacity`
-  background-color: #54c558ff;
+  background-color: #2f3699ff;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 15px;
   margin-top: 20px;
 `;
 
 const ButtonText = styled.Text`
   color: white;
-  font-size: 16px;
+  font-size: 25px;
+  font-weight: bold;
 `;
 
 const Icon = styled.Image`
