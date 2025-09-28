@@ -1,6 +1,8 @@
+import { router } from "expo-router";
+
 import styled from "styled-components/native";
 
-export default function Componente() {
+export default function Index() {
   return (
     <Contenedor>
       <Icon
@@ -9,7 +11,7 @@ export default function Componente() {
       />
       <Title>Conversor</Title>
       <Subtitle>(cm) a (m)</Subtitle>
-      <StartButton>
+      <StartButton onPress={() => router.push("/conversor")}>
         <ButtonText>Iniciar</ButtonText>
       </StartButton>
     </Contenedor>
