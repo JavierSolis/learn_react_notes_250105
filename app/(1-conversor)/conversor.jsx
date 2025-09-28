@@ -1,14 +1,34 @@
 import { router } from "expo-router";
+import { useState } from "react";
+import { Alert } from "react-native";
 import styled from "styled-components/native";
 
-export default function Componente() {
+export default function Conversor() {
+  const [cmInput, setCmInput] = useState("");
+  const [metros, setMetros] = useState("");
+  const convertirCmAM = () => {
+    if (!cmInput) {
+      Alert.alert("Error", "Por favor ingresa un valor en cm");
+    }
+    let m = parseFloat(cmInput) / 100;
+    setMetros(m);
+  };
+
   return (
     <Contenedor>
-      <Input />
-      <CalculateButton>
+      <Input
+        placeholder="Centimetros"
+        keyboardType="numeric"
+        inputMode="numeric"
+        returnKeyType="done"
+        onChangeText={setCmInput}
+      />
+      <CalculateButton onPress={convertirCmAM}>
         <ButtonText>Calcular</ButtonText>
       </CalculateButton>
-      <ResultText>Resultado: </ResultText>
+      <ResultText>
+        Resultado: {isNaN(metros) ? "" : metros + " metros"}
+      </ResultText>
       <BackButton onPress={() => router.back()}>
         <ButtonText>Volver</ButtonText>
       </BackButton>
