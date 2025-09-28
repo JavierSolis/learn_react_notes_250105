@@ -47,3 +47,19 @@
 ```
 
 - Luego en el archivo se puede escribir "rnc" y aparecera como opcion para que se insrte plantilla
+
+## Imagen por url
+
+```tsx
+...
+      <Icon
+        source={{ uri: "https://i.ibb.co/xTXWP76/modista.png" }}
+        resizeMode="contain"
+      />
+...
+const Icon = styled.Image`
+  width: 204px;
+  height: 204px;
+`;
+
+```
