@@ -10,3 +10,40 @@
 - para usar stack, se creo una carpeta "\_layout.tsx" que expo tomar por defecto
 - En layout se puede poner 1-conversor/index per por convencion se coloca (1-conversor) y tambien la carpeta se cambio a ese nombre, asu expo entiende que debe ir a esa carpeta que es un grupo de layout y tiene su propio \_layout, como su propio indice de pantallas
 - por eso la capera de 1-conversor se paso a llamr (1-conversor) esto le indca a expo que es un grupo
+
+## Snippet
+
+- Ir a https://snippet-generator.app/, ahí se puede crear una plantulla reusable, ingresar los datos
+- en vs en comandos buscar "snipet">configura cion > agregar global> y pegar lo generado en la pagina, quedara algo asi, en este caso se creao una plantilla de componente con styled
+
+```json
+{
+  "para crear react componentes con styled": {
+    "prefix": "rnc",
+    "body": [
+      "import styled from \"styled-components/native\";",
+      "",
+      "export default function Componente() {",
+      "  return (",
+      "    <Contenedor>",
+      "      <Texto>Componente</Texto>",
+      "    </Contenedor>",
+      "  );",
+      "}",
+      "",
+      "const Contenedor = styled.View`",
+      "  flex: 1;",
+      "  justify-content: center;",
+      "  align-items: center;",
+      "`;",
+      "const Texto = styled.Text`",
+      "  font-size: 20px;",
+      "`;",
+      ""
+    ],
+    "description": "para crear react componentes con styled"
+  }
+}
+```
+
+- Luego en el archivo se puede escribir "rnc" y aparecera como opcion para que se insrte plantilla
