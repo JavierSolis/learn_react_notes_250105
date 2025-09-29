@@ -226,3 +226,40 @@ export default function Componente() {
 }
 ...
 ```
+
+## Nuevas propìedads para mas dinamismo
+
+Se puede asiganr nevas propiedades a las componete y se puede usar en los estilos para hacerlos dinamicos segun su valor, en el ejemplo se agego el "selected" y un useState para cambiar los estilos de l opciones
+
+```tsx
+//2-listas/index
+import { useState } from "react";
+...
+
+export default function index() {
+  ...
+  const [selectedOption, setSelectedOption] = useState(0);
+
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableaOption
+        selected={selectedOption === item.key}
+        onPress={() => {
+          setSelectedOption(item.key);
+        }}
+      >
+        ...
+      </TouchableaOption>
+    );
+  };
+  ...
+}
+
+const TouchableaOption = styled.TouchableOpacity`
+  background-color: ${(props) => (props.selected ? "#ADD8E6" : "transparent")};
+  border-radius: 20px;
+  margin-bottom: 10px;
+`;
+...
+
+```

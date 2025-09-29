@@ -1,89 +1,103 @@
-import { FlatList, SectionList } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import styled from "styled-components/native";
 
-export default function Componente() {
-  const data = [
-    { product: "Cervesa", price: "S/.10.00" },
-    { product: "Papas", price: "S/.5.00" },
-    { product: "Gaseosa", price: "S/.8.00" },
-    { product: "Agua", price: "S/.4.00" },
-    { product: "Ceviche", price: "S/.20.00" },
-    { product: "Lomo Saltado", price: "S/.25.00" },
-    { product: "Arroz con Pollo", price: "S/.18.00" },
-    { product: "Pollo a la Brasa", price: "S/.30.00" },
-    { product: "Anticuchos", price: "S/.15.00" },
-    { product: "Chicha Morada", price: "S/.6.00" },
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+export default function index() {
+  const route = useRouter();
+  const dataRutas = [
+    { key: 1, name: "FlatList", href: "/(1-conversor)" },
+    { key: 2, name: "SectionList", href: "/(2-listas)" },
   ];
 
-  const dataSecionList = [
-    {
-      title: "Bebidas",
-      data: [
-        { product: "Cervesa", price: "S/.10.00" },
-        { product: "Gaseosa", price: "S/.8.00" },
-        { product: "Agua", price: "S/.4.00" },
-        { product: "Chicha Morada", price: "S/.6.00" },
-      ],
-    },
-    {
-      title: "Comida",
-      data: [
-        { product: "Ceviche", price: "S/.20.00" },
-        { product: "Lomo Saltado", price: "S/.25.00" },
-        { product: "Arroz con Pollo", price: "S/.18.00" },
-        { product: "Pollo a la Brasa", price: "S/.30.00" },
-        { product: "Anticuchos", price: "S/.15.00" },
-      ],
-    },
-  ];
+  const [selectedOption, setSelectedOption] = useState(0);
 
-  const renderItem = ({ item }) => (
-    <Item>
-      <Text>{item.product}</Text>
-      <Text>{item.price}</Text>
-    </Item>
-  );
-
-  const renderHeader = ({ section }) => <Text>{section.title}</Text>;
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableaOption
+        selected={selectedOption === item.key}
+        onPress={() => {
+          setSelectedOption(item.key);
+        }}
+      >
+        <LinkButton>
+          <ItemContenedor>
+            <Name>{item.name}</Name>
+            <ArrowIcon name="arrow-forward-ios" color="black" />
+          </ItemContenedor>
+        </LinkButton>
+      </TouchableaOption>
+    );
+  };
 
   return (
-    <Contenedor>
-      <Title>FLat List</Title>
-      <FlatList
-        data={data}
+    <RootArea edges={["top", "left", "right"]}>
+      <StatusBar style="dark" />
+      <Title>Menú</Title>
+      <Lista
+        data={dataRutas}
         renderItem={renderItem}
-        keyExtractor={(item) => item.product}
+        keyExtractor={(data) => data.key}
       />
-
-      <Title style={{ paddingTop: 30 }}>Section List</Title>
-      <SectionList
-        sections={dataSecionList}
-        renderItem={renderItem}
-        renderSectionHeader={renderHeader}
-        keyExtractor={(item) => item.product}
-      />
-    </Contenedor>
+    </RootArea>
   );
 }
 
-const Contenedor = styled(SafeAreaView)`
+const TouchableaOption = styled.TouchableOpacity`
+  background-color: ${(props) => (props.selected ? "#ADD8E6" : "transparent")};
+  border-radius: 20px;
+  margin-bottom: 10px;
+`;
+const RootArea = styled(SafeAreaView)`
   flex: 1;
+  align-items: center;
+  justify-content: center;
   padding-top: 10px;
+`;
+
+const Contenedor = styled.View`
+  flex: 1;
   justify-content: center;
   align-items: center;
 `;
 const Title = styled.Text`
   font-size: 20px;
 `;
-const Text = styled.Text`
-  font-size: 15px;
-`;
-const Item = styled.View`
+
+const LinkButton = styled.View`
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 20px;
   flex-direction: row;
+  border: 2px solid #cecece;
+  width: 100%;
   justify-content: space-between;
+  background-color: #cecece;
+`;
+
+const ItemContenedor = styled.View`
+  border-radius: 20px;
+  flex-direction: row;
+  border: 2px solid #cecece;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #cecece;
+`;
+
+const Name = styled.Text`
+  font-size: 18px;
+`;
+
+const Lista = styled.FlatList`
+  width: 100%;
+  margin: 15px;
   padding: 10px;
-  border-bottom-width: 1px;
-  border-bottom-color: #ccc;
-  width: 300px;
+`;
+
+const ArrowIcon = styled(MaterialIcons)`
+  margin-right: 10px;
+  color: black;
 `;
