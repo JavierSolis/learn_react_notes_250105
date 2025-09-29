@@ -2,7 +2,7 @@ import { SectionList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
-export default function SectionListScreen() {
+export function SectionListScreen() {
   const dataSecionList = [
     {
       title: "Bebidas",
@@ -32,7 +32,9 @@ export default function SectionListScreen() {
     </Item>
   );
 
-  const renderHeader = ({ section }) => <Text>{section.title}</Text>;
+  const renderHeader = ({ section }) => (
+    <Text style={{ fontWeight: "bold" }}>{section.title}</Text>
+  );
 
   return (
     <Contenedor>

@@ -2,7 +2,7 @@ import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
-export default function FLatList() {
+export function FlatListScreen() {
   const data = [
     { product: "Cervesa", price: "S/.10.00" },
     { product: "Papas", price: "S/.5.00" },

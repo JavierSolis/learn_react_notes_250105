@@ -297,3 +297,34 @@ A2(item)
 [item].map( (item)=>A2(item) );
 //imprimira b
 ```
+
+## Inyectar componentes
+
+Se puiede importar compknetes y agregarlo de forma dinamica o directamente
+
+```tsx
+...
+import { FlatListScreen } from "./flat-list";
+import { SectionListScreen } from "./section-list";
+
+export default function index() {
+  const route = useRouter();
+  const dataRutas = [
+    {
+      key: 0,
+      name: "FlatList",
+      component: <FlatListScreen />,
+    },
+    ...
+  ];
+
+  const [selectedOption, setSelectedOption] = useState(0);
+
+  return (
+    ...
+      <ContentComponent>{dataRutas[selectedOption].component}</ContentComponent>
+    ...
+
+  );
+}
+```

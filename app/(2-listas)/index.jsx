@@ -4,11 +4,22 @@ import styled from "styled-components/native";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { FlatListScreen } from "./flat-list";
+import { SectionListScreen } from "./section-list";
+
 export default function index() {
   const route = useRouter();
   const dataRutas = [
-    { key: 1, name: "FlatList", href: "/(1-conversor)" },
-    { key: 2, name: "SectionList", href: "/(2-listas)" },
+    {
+      key: 0,
+      name: "FlatList",
+      component: <FlatListScreen />,
+    },
+    {
+      key: 1,
+      name: "SectionList",
+      component: <SectionListScreen />,
+    },
   ];
 
   const [selectedOption, setSelectedOption] = useState(0);
@@ -43,6 +54,7 @@ export default function index() {
       <CategoriaSection>
         {dataRutas.map((item) => renderItem(item))}
       </CategoriaSection>
+      <ContentComponent>{dataRutas[selectedOption].component}</ContentComponent>
     </RootArea>
   );
 }
@@ -89,4 +101,12 @@ const Name = styled.Text`
 
 const Lista = styled.FlatList`
   padding: 8px;
+`;
+//componentes
+const ContentComponent = styled.View`
+  flex: 1;
+  width: 100%;
+  padding: 20px;
+
+  background-color: rgba(188, 224, 233, 1);
 `;
