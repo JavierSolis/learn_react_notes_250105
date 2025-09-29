@@ -1,3 +1,4 @@
+import { MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { FlatList } from "react-native";
 import styled from "styled-components/native";
@@ -11,6 +12,7 @@ export default function Componente() {
   const renderItem = ({ item }) => {
     return (
       <LinkButton href={item.href}>
+        <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
         <Title>Título: {item.name}</Title>
       </LinkButton>
     );

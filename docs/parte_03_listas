@@ -114,3 +114,10 @@ const LinkButton = styled(Link)`
 ## Vector icons
 
 Pagina de iconos, donde poder buscar iconos: https://icons.expo.fyi/Index
+Si se usa Materual Icons asegurarse que el icono a usa sea de ese grupo
+
+```tsx
+import { MaterialIcons } from "@expo/vector-icons";
+...
+        <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
+```
