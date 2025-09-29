@@ -1,9 +1,10 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { Link } from "expo-router";
-import { FlatList } from "react-native";
+import { useRouter } from "expo-router";
+import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
 export default function Componente() {
+  const route = useRouter();
   const dataRutas = [
     { key: 1, name: "(1-conversor)", href: "/(1-conversor)" },
     { key: 2, name: "(2-listas)", href: "/(2-listas)" },
@@ -11,17 +12,21 @@ export default function Componente() {
 
   const renderItem = ({ item }) => {
     return (
-      <LinkButton href={item.href}>
-        <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
-        <Title>Título: {item.name}</Title>
-      </LinkButton>
+      <TouchableOpacity onPress={() => route.push(item.href)}>
+        <LinkButton>
+          <ItemContenedor>
+            <Name>{item.name}</Name>
+            <ArrowIcon name="arrow-forward-ios" color="black" />
+          </ItemContenedor>
+        </LinkButton>
+      </TouchableOpacity>
     );
   };
 
   return (
     <Contenedor>
-      <Texto>Componente</Texto>
-      <FlatList
+      <Title>Componente</Title>
+      <Lista
         data={dataRutas}
         renderItem={renderItem}
         keyExtractor={(data) => data.key}
@@ -35,18 +40,41 @@ const Contenedor = styled.View`
   justify-content: center;
   align-items: center;
 `;
-const Texto = styled.Text`
-  font-size: 20px;
-`;
 const Title = styled.Text`
   font-size: 20px;
 `;
 
-const LinkButton = styled(Link)`
+const LinkButton = styled.View`
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 20px;
   flex-direction: row;
   border: 2px solid #cecece;
   width: 100%;
+  justify-content: space-between;
+  background-color: #cecece;
+`;
+
+const ItemContenedor = styled.View`
+  border-radius: 20px;
+  flex-direction: row;
+  border: 2px solid #cecece;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #cecece;
+`;
+
+const Name = styled.Text`
+  font-size: 18px;
+`;
+
+const Lista = styled.FlatList`
+  width: 100%;
+  margin: 15px;
+  padding: 10px;
+`;
+
+const ArrowIcon = styled(MaterialIcons)`
+  margin-right: 10px;
+  color: black;
 `;
