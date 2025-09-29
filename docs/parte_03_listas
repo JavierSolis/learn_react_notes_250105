@@ -1,0 +1,52 @@
+# Parte 03 — Listas
+
+**Índice**
+
+<!-- Índice actualizado -->
+
+1. [Navegación según Expo](#navegación-según-expo)
+2. [Snippet](#snippet)
+3. [Imagen por URL](#imagen-por-url)
+4. [Ejemplo básico de un input y cómo procesarlo (ej. Conversor)](#ejemplo-básico-de-un-input-y-cómo-procesarlo-ej-conversor)
+
+##
+
+inicia en https://youtu.be/GaXEzkDs6Yk?t=8600
+
+![borrar despues](image.png)
+
+## FlatList
+
+https://reactnative.dev/docs/flatlist
+
+-Segun la docn oficial, layout acrga primero asi existe¡a un index, si exite index,el carga primero
+
+-Se crear un menu en index para que de ahi se pueda esgoer que pantalla ir
+
+``jsx
+import { FlatList } from "react-native";
+...
+export default function Componente() {
+const dataRutas = [
+{ key: 1, name: "(1-conversor)" },
+{ key: 2, name: "(2-listas)" },
+];
+
+const renderItem = ({ item }) => <Title>Título: {item.name}</Title>;
+
+return (
+...
+<FlatList
+data={dataRutas}
+renderItem={renderItem}
+keyExtractor={(data) => data.key}
+/>
+...
+);
+}
+
+const Title = styled.Text`  font-size: 20px;`;
+
+```
+
+```
