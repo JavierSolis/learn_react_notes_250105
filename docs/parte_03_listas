@@ -162,3 +162,67 @@ import { StatusBar } from "expo-status-bar";
       <StatusBar style="dark" />
 ...
 ```
+
+## Router vs UseRouter
+
+- User Router se usa cuando lo quieres en codigo pero si solo es en la aprte visual se puede usa route
+
+## Ejemplo de falt list y section list
+
+```tsx
+import { FlatList, SectionList } from "react-native";
+...
+
+export default function Componente() {
+  const data = [
+    { product: "Cervesa", price: "S/.10.00" },
+    ...
+  ];
+
+  const dataSecionList = [
+    {
+      title: "Bebidas",
+      data: [
+        { product: "Cervesa", price: "S/.10.00" },
+        ...
+      ],
+    },
+    {
+      title: "Comida",
+      data: [
+        { product: "Ceviche", price: "S/.20.00" },
+        ...
+      ],
+    },
+  ];
+
+  const renderItem = ({ item }) => (
+    <Item>
+      <Text>{item.product}</Text>
+      <Text>{item.price}</Text>
+    </Item>
+  );
+
+  const renderHeader = ({ section }) => <Text>{section.title}</Text>;
+
+  return (
+    <Contenedor>
+      <Title>FLat List</Title>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.product}
+      />
+
+      <Title style={{ paddingTop: 30 }}>Section List</Title>
+      <SectionList
+        sections={dataSecionList}
+        renderItem={renderItem}
+        renderSectionHeader={renderHeader}
+        keyExtractor={(item) => item.product}
+      />
+    </Contenedor>
+  );
+}
+...
+```
