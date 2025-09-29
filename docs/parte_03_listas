@@ -121,3 +121,32 @@ import { MaterialIcons } from "@expo/vector-icons";
 ...
         <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
 ```
+
+## Safe Area Expo
+
+En el video usa safe area de nativo, pero en expo tiene uno quenos arhorra elt rabajo de la logica, usansao SafeRea de expo
+
+```tsx
+...
+import { SafeAreaView } from "react-native-safe-area-context";
+
+export default function Componente() {
+  ...
+  return (
+    <RootArea edges={["top", "left", "right"]}>
+      <Title>Componente</Title>
+      <Lista
+        data={dataRutas}
+        renderItem={renderItem}
+        keyExtractor={(data) => data.key}
+      />
+    </RootArea>
+  );
+}
+
+const RootArea = styled(SafeAreaView)`
+  flex: 1;
+  align-items: center;
+`;
+...
+```

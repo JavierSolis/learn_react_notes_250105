@@ -3,6 +3,8 @@ import { useRouter } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
+import { SafeAreaView } from "react-native-safe-area-context";
+
 export default function Componente() {
   const route = useRouter();
   const dataRutas = [
@@ -24,16 +26,21 @@ export default function Componente() {
   };
 
   return (
-    <Contenedor>
+    <RootArea edges={["top", "left", "right"]}>
       <Title>Componente</Title>
       <Lista
         data={dataRutas}
         renderItem={renderItem}
         keyExtractor={(data) => data.key}
       />
-    </Contenedor>
+    </RootArea>
   );
 }
+
+const RootArea = styled(SafeAreaView)`
+  flex: 1;
+  align-items: center;
+`;
 
 const Contenedor = styled.View`
   flex: 1;
