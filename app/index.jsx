@@ -3,6 +3,7 @@ import { useRouter } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
+import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Componente() {
@@ -27,7 +28,8 @@ export default function Componente() {
 
   return (
     <RootArea edges={["top", "left", "right"]}>
-      <Title>Componente</Title>
+      <StatusBar style="dark" />
+      <Title>Menú</Title>
       <Lista
         data={dataRutas}
         renderItem={renderItem}
@@ -40,6 +42,8 @@ export default function Componente() {
 const RootArea = styled(SafeAreaView)`
   flex: 1;
   align-items: center;
+  justify-content: center;
+  padding-top: 10px;
 `;
 
 const Contenedor = styled.View`

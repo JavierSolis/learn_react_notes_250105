@@ -150,3 +150,15 @@ const RootArea = styled(SafeAreaView)`
 `;
 ...
 ```
+
+## Satus bar
+
+En caso se quiera modifica existe status bar
+
+```tsx
+...
+import { StatusBar } from "expo-status-bar";
+...
+      <StatusBar style="dark" />
+...
+```
