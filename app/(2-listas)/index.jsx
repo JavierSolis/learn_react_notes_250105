@@ -1,8 +1,6 @@
-import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import styled from "styled-components/native";
 
-import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -15,9 +13,11 @@ export default function index() {
 
   const [selectedOption, setSelectedOption] = useState(0);
 
-  const renderItem = ({ item }) => {
+  const renderItem = (item) => {
+    //const item = itemR.item;
     return (
       <TouchableaOption
+        key={item.key}
         selected={selectedOption === item.key}
         onPress={() => {
           setSelectedOption(item.key);
@@ -26,7 +26,6 @@ export default function index() {
         <LinkButton>
           <ItemContenedor>
             <Name>{item.name}</Name>
-            <ArrowIcon name="arrow-forward-ios" color="black" />
           </ItemContenedor>
         </LinkButton>
       </TouchableaOption>
@@ -35,56 +34,53 @@ export default function index() {
 
   return (
     <RootArea edges={["top", "left", "right"]}>
-      <StatusBar style="dark" />
-      <Title>Menú</Title>
-      <Lista
+      <Title>Seleccione una categoría</Title>
+      {/*<Lista
         data={dataRutas}
         renderItem={renderItem}
         keyExtractor={(data) => data.key}
-      />
+      />*/}
+      <CategoriaSection>
+        {dataRutas.map((item) => renderItem(item))}
+      </CategoriaSection>
     </RootArea>
   );
 }
 
+const CategoriaSection = styled.View`
+  margin-top: 20px;
+  padding: 0 20px;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  --justify-content: space-between;
+`;
+
 const TouchableaOption = styled.TouchableOpacity`
   background-color: ${(props) => (props.selected ? "#ADD8E6" : "transparent")};
-  border-radius: 20px;
+  border-radius: 10px;
   margin-bottom: 10px;
+  margin-right: 10px;
 `;
 const RootArea = styled(SafeAreaView)`
   flex: 1;
   align-items: center;
-  justify-content: center;
   padding-top: 10px;
 `;
 
-const Contenedor = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
 const Title = styled.Text`
   font-size: 20px;
 `;
 
 const LinkButton = styled.View`
-  padding: 15px;
+  padding: 10px 20px;
   margin-bottom: 10px;
   border-radius: 20px;
-  flex-direction: row;
   border: 2px solid #cecece;
-  width: 100%;
-  justify-content: space-between;
-  background-color: #cecece;
 `;
 
 const ItemContenedor = styled.View`
-  border-radius: 20px;
-  flex-direction: row;
-  border: 2px solid #cecece;
-  width: 100%;
-  justify-content: space-between;
-  background-color: #cecece;
+  flex-direction: column;
 `;
 
 const Name = styled.Text`
@@ -92,12 +88,5 @@ const Name = styled.Text`
 `;
 
 const Lista = styled.FlatList`
-  width: 100%;
-  margin: 15px;
-  padding: 10px;
-`;
-
-const ArrowIcon = styled(MaterialIcons)`
-  margin-right: 10px;
-  color: black;
+  padding: 8px;
 `;

@@ -263,3 +263,37 @@ const TouchableaOption = styled.TouchableOpacity`
 ...
 
 ```
+
+## Paso de propiedades ( MUY IMPORTANTE )
+
+- Cuando se pasa en una funcion f(item) y en su definciion es f({item}), lo que esta haciendo es recibir una propiedad de item, no el item mismo
+- Es decir al hacer useo de los corchetes {} se esta pasando o accdiendo directamenta a una propuieda del objeto pasado no al objeto entero
+
+```tsx
+//se
+const item = {item:"item", name:"b"}
+
+funcion A1(item){
+  console.log(item.name)
+}
+A(item)
+//imprimira b
+
+funcion A2({name}){
+  console.log(name)
+}
+A2(item)
+//imprimira b
+
+[item].map( (item)=>A1({item}) );
+//imprimira item
+
+[item].map( ({item})=>A1(item) );
+//imprimira ERROR /porque item.item no tieme propuedad name
+
+[item].map( ({item})=>A2(item) );
+//imprimira ERROR /porque propueda item no tiene propeidad name
+
+[item].map( (item)=>A2(item) );
+//imprimira b
+```
