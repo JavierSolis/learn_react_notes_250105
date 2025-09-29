@@ -23,30 +23,94 @@ https://reactnative.dev/docs/flatlist
 
 -Se crear un menu en index para que de ahi se pueda esgoer que pantalla ir
 
-``jsx
+```jsx
 import { FlatList } from "react-native";
 ...
 export default function Componente() {
-const dataRutas = [
-{ key: 1, name: "(1-conversor)" },
-{ key: 2, name: "(2-listas)" },
-];
+  const dataRutas = [
+    { key: 1, name: "(1-conversor)" },
+    { key: 2, name: "(2-listas)" },
+  ];
 
-const renderItem = ({ item }) => <Title>Título: {item.name}</Title>;
+  const renderItem = ({ item }) => <Title>Título: {item.name}</Title>;
 
-return (
-...
-<FlatList
-data={dataRutas}
-renderItem={renderItem}
-keyExtractor={(data) => data.key}
-/>
-...
-);
+  return (
+    ...
+      <FlatList
+        data={dataRutas}
+        renderItem={renderItem}
+        keyExtractor={(data) => data.key}
+      />
+    ...
+  );
 }
 
-const Title = styled.Text`  font-size: 20px;`;
+const Title = styled.Text`
+  font-size: 20px;
+`;
 
 ```
 
+## Uso de href para pantallas
+
+- Se puede usar href y navegar a cada carpet sin usar rl "()" para indicar grupo, pero es cuestion de gustos, con href se puede dispensar de poenrlo como grupo
+
+```tsx
+import { Link } from "expo-router";
+...
+export default function Componente() {
+  const dataRutas = [
+    { key: 1, name: "(1-conversor)", href: "/(1-conversor)" },
+    { key: 2, name: "(2-listas)", href: "/(2-listas)" },
+  ];
+
+  const renderItem = ({ item }) => {
+    return (
+      <Link href={item.href}>
+        <Title>Título: {item.name}</Title>
+      </Link>
+    );
+  };
+
+  return (
+    ...
+      <FlatList
+        data={dataRutas}
+        renderItem={renderItem}
+        keyExtractor={(data) => data.key}
+        ...
+  );
+
+}
+...
+
+
 ```
+
+## Styled en componentes no nativos
+
+Se usa la sintaxis styled(<Componete no nativo>) para que lo tome com estilo y poder usarlo
+
+```tsx
+...
+const renderItem = ({ item }) => {
+    return (
+      <LinkButton href={item.href}>
+        <Title>Título: {item.name}</Title>
+      </LinkButton>
+    );
+  };
+...
+const LinkButton = styled(Link)`
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  flex-direction: row;
+  border: 2px solid #cecece;
+  width: 100%;
+`;
+```
+
+## Vector icons
+
+Pagina de iconos, donde poder buscar iconos: https://icons.expo.fyi/Index
