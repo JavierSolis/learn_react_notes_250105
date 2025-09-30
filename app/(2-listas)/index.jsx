@@ -4,7 +4,9 @@ import styled from "styled-components/native";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { LinearGradient } from "expo-linear-gradient";
 import { FlatListScreen } from "./flat-list";
+import { GradientesScreen } from "./gradientes";
 import { SectionListScreen } from "./section-list";
 
 export default function index() {
@@ -19,6 +21,11 @@ export default function index() {
       key: 1,
       name: "SectionList",
       component: <SectionListScreen />,
+    },
+    {
+      key: 2,
+      name: "Gradientes",
+      component: <GradientesScreen />,
     },
   ];
 
@@ -45,12 +52,8 @@ export default function index() {
 
   return (
     <RootArea edges={["top", "left", "right"]}>
+      <GradientBackground />
       <Title>Seleccione una categoría</Title>
-      {/*<Lista
-        data={dataRutas}
-        renderItem={renderItem}
-        keyExtractor={(data) => data.key}
-      />*/}
       <CategoriaSection>
         {dataRutas.map((item) => renderItem(item))}
       </CategoriaSection>
@@ -58,6 +61,16 @@ export default function index() {
     </RootArea>
   );
 }
+
+const GradientBackground = styled(LinearGradient).attrs({
+  colors: ["#7b6da1ff", "transparent"],
+  start: { x: 0, y: 0 },
+  end: { x: 0, y: 0.5 },
+})`
+  position: absolute;
+  width: 100%;
+  height: 50%;
+`;
 
 const CategoriaSection = styled.View`
   margin-top: 20px;
@@ -78,6 +91,7 @@ const RootArea = styled(SafeAreaView)`
   flex: 1;
   align-items: center;
   padding-top: 10px;
+  position: relative;
 `;
 
 const Title = styled.Text`
