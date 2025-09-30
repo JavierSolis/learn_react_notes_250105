@@ -2,7 +2,7 @@
 	<h1>Notas del Curso React Native (Serie de 4 Partes)</h1>
 	<p>
 		<img alt="Licencia" src="https://img.shields.io/badge/license-MIT-green" />
-		<img alt="Estado" src="https://img.shields.io/badge/avance-parte%2002-blue" />
+		<img alt="Estado" src="https://img.shields.io/badge/avance-parte%2003-blue" />
 		<img alt="React Native" src="https://img.shields.io/badge/react--native-expo-blue" />
 		<img alt="Tipo" src="https://img.shields.io/badge/docs-notas-informational" />
 	</p>
