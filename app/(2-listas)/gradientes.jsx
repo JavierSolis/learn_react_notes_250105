@@ -3,17 +3,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
 export function GradientesScreen() {
-  const renderItem = ({ item }) => (
-    <Item>
-      <Text>{item.product}</Text>
-      <Text>{item.price}</Text>
-    </Item>
-  );
-
-  const renderHeader = ({ section }) => (
-    <Text style={{ fontWeight: "bold" }}>{section.title}</Text>
-  );
-
   return (
     <Contenedor>
       <LinearGradient

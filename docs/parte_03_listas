@@ -4,24 +4,31 @@
 
 <!-- Índice actualizado -->
 
-1. [Navegación según Expo](#navegación-según-expo)
-2. [Snippet](#snippet)
-3. [Imagen por URL](#imagen-por-url)
-4. [Ejemplo básico de un input y cómo procesarlo (ej. Conversor)](#ejemplo-básico-de-un-input-y-cómo-procesarlo-ej-conversor)
+1. [Inicia en](#inicia-en)
+2. [FlatList](#flatlist)
+3. [Uso de href para pantallas](#uso-de-href-para-pantallas)
+4. [Styled en componentes no nativos](#styled-en-componentes-no-nativos)
+5. [Vector icons](#vector-icons)
+6. [Safe Area en Expo](#safe-area-en-expo)
+7. [Status bar](#status-bar)
+8. [Router vs useRouter](#router-vs-userouter)
+9. [Ejemplo de FlatList y SectionList](#ejemplo-de-flatlist-y-sectionlist)
+10. [Nuevas propiedades para más dinamismo](#nuevas-propiedades-para-mas-dinamismo)
+11. [Paso de propiedades (MUY IMPORTANTE)](#paso-de-propiedades-muy-importante)
+12. [Inyectar componentes](#inyectar-componentes)
+13. [Gradient](#gradient)
+14. [Listas paginadas](#listas-paginadas)
 
-##
+## Inicia en
 
-inicia en https://youtu.be/GaXEzkDs6Yk?t=8600
-
-![borrar despues](image.png)
+Inicia en: https://youtu.be/GaXEzkDs6Yk?t=8600
 
 ## FlatList
 
-https://reactnative.dev/docs/flatlist
+Doc oficial: https://reactnative.dev/docs/flatlist
 
--Segun la docn oficial, layout acrga primero asi existe¡a un index, si exite index,el carga primero
-
--Se crear un menu en index para que de ahi se pueda esgoer que pantalla ir
+- Según la documentación oficial, el layout se carga primero; si existe un `index`, éste se carga primero.
+- Se crea un menú en `index` para que desde ahí se pueda escoger a qué pantalla ir.
 
 ```jsx
 import { FlatList } from "react-native";
@@ -53,7 +60,7 @@ const Title = styled.Text`
 
 ## Uso de href para pantallas
 
-- Se puede usar href y navegar a cada carpet sin usar rl "()" para indicar grupo, pero es cuestion de gustos, con href se puede dispensar de poenrlo como grupo
+- Se puede usar `href` y navegar a cada carpeta sin usar los paréntesis `()` para indicar grupo. Es cuestión de gustos. Con `href` se puede prescindir de declararlo como grupo, aunque los grupos ayudan a organizar.
 
 ```tsx
 import { Link } from "expo-router";
@@ -89,7 +96,7 @@ export default function Componente() {
 
 ## Styled en componentes no nativos
 
-Se usa la sintaxis styled(<Componete no nativo>) para que lo tome com estilo y poder usarlo
+Se usa la sintaxis `styled(<Componente no nativo>)` para que lo tome como estilo y poder usarlo como si fuera un componente estilizado.
 
 ```tsx
 ...
@@ -113,8 +120,8 @@ const LinkButton = styled(Link)`
 
 ## Vector icons
 
-Pagina de iconos, donde poder buscar iconos: https://icons.expo.fyi/Index
-Si se usa Materual Icons asegurarse que el icono a usa sea de ese grupo
+Página de íconos para buscar: https://icons.expo.fyi/Index
+Si se usan `MaterialIcons`, asegurarse de que el ícono elegido pertenezca a ese set.
 
 ```tsx
 import { MaterialIcons } from "@expo/vector-icons";
@@ -122,9 +129,9 @@ import { MaterialIcons } from "@expo/vector-icons";
         <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
 ```
 
-## Safe Area Expo
+## Safe Area en Expo
 
-En el video usa safe area de nativo, pero en expo tiene uno quenos arhorra elt rabajo de la logica, usansao SafeRea de expo
+En el video se usa `SafeAreaView` nativo, pero en Expo existe uno que nos ahorra el trabajo de la lógica: usar `SafeAreaView` de `react-native-safe-area-context` (con styled-components también funciona bien).
 
 ```tsx
 ...
@@ -151,9 +158,9 @@ const RootArea = styled(SafeAreaView)`
 ...
 ```
 
-## Satus bar
+## Status bar
 
-En caso se quiera modifica existe status bar
+En caso se quiera modificar el estilo se puede usar `StatusBar` de Expo.
 
 ```tsx
 ...
@@ -163,11 +170,11 @@ import { StatusBar } from "expo-status-bar";
 ...
 ```
 
-## Router vs UseRouter
+## Router vs useRouter
 
-- User Router se usa cuando lo quieres en codigo pero si solo es en la aprte visual se puede usa route
+- `useRouter` se usa cuando quieres navegar desde código (ej. en un handler). Si sólo es navegación visual directa, se puede usar `<Link />`.
 
-## Ejemplo de falt list y section list
+## Ejemplo de FlatList y SectionList
 
 ```tsx
 import { FlatList, SectionList } from "react-native";
@@ -227,9 +234,9 @@ export default function Componente() {
 ...
 ```
 
-## Nuevas propìedads para mas dinamismo
+## Nuevas propiedades para más dinamismo
 
-Se puede asiganr nevas propiedades a las componete y se puede usar en los estilos para hacerlos dinamicos segun su valor, en el ejemplo se agego el "selected" y un useState para cambiar los estilos de l opciones
+Se pueden asignar nuevas propiedades a los componentes y usarlas en los estilos para hacerlos dinámicos según su valor. En el ejemplo se agregó la prop `selected` y un `useState` para cambiar los estilos de las opciones.
 
 ```tsx
 //2-listas/index
@@ -264,43 +271,41 @@ const TouchableaOption = styled.TouchableOpacity`
 
 ```
 
-## Paso de propiedades ( MUY IMPORTANTE )
+## Paso de propiedades (MUY IMPORTANTE)
 
-- Cuando se pasa en una funcion f(item) y en su definciion es f({item}), lo que esta haciendo es recibir una propiedad de item, no el item mismo
-- Es decir al hacer useo de los corchetes {} se esta pasando o accdiendo directamenta a una propuieda del objeto pasado no al objeto entero
+- Cuando se llama a una función como `f(item)` y su definición es `function f({ item }) {}`, lo que realmente hace es desestructurar la propiedad `item` de un objeto cuyo shape sería `{ item: ... }`. Si le pasas directamente un objeto que no tiene esa forma, fallará.
+- El uso de llaves `{}` en los parámetros indica desestructuración: accedes a propiedades específicas del objeto, no al objeto completo.
 
 ```tsx
-//se
-const item = {item:"item", name:"b"}
+// Ejemplo
+const dato = { item: "item", name: "b" };
 
-funcion A1(item){
-  console.log(item.name)
+function A1(obj) {
+  console.log(obj.name);
 }
-A(item)
-//imprimira b
+A1(dato); // imprimirá b
 
-funcion A2({name}){
-  console.log(name)
+function A2({ name }) {
+  console.log(name);
 }
-A2(item)
-//imprimira b
+A2(dato); // imprimirá b
 
-[item].map( (item)=>A1({item}) );
-//imprimira item
+[dato].map((x) => A1({ item: x }));
+// imprimirá undefined (el objeto pasado no tiene name)
 
-[item].map( ({item})=>A1(item) );
-//imprimira ERROR /porque item.item no tieme propuedad name
+[dato].map(({ item }) => A1(item));
+// ERROR porque 'item' es un string, no un objeto con name
 
-[item].map( ({item})=>A2(item) );
-//imprimira ERROR /porque propueda item no tiene propeidad name
+[dato].map(({ item }) => A2(item));
+// ERROR porque 'item' es un string y no tiene 'name'
 
-[item].map( (item)=>A2(item) );
-//imprimira b
+[dato].map((x) => A2(x));
+// imprimirá b
 ```
 
 ## Inyectar componentes
 
-Se puiede importar compknetes y agregarlo de forma dinamica o directamente
+Se pueden importar componentes y agregarlos de forma dinámica (por ejemplo, almacenados en un arreglo) o directamente en el JSX.
 
 ```tsx
 ...
@@ -331,7 +336,7 @@ export default function index() {
 
 ## Gradient
 
-Para hacer stylet para LineaGradient no se da los stils directamente, se piede dar valor a los atributos
+Para hacer `styled` de `LinearGradient` no se pasan los estilos directamente como props; se pueden definir valores por defecto mediante `.attrs` y luego estilizar con styled-components.
 
 ```jsx
 ...
@@ -358,4 +363,66 @@ const GradientBackground = styled(LinearGradient).attrs({
  height: 50%;
 `;
 ...
+```
+
+## Listas paginadas
+
+`FlatList` ofrece propiedades para implementar carga incremental (infinite scroll). `onEndReached` indica desde qué punto (medido por `onEndReachedThreshold`) debe dispararse la carga. Además, se puede usar un `ActivityIndicator` para mostrar al usuario que se están cargando más datos.
+
+```jsx
+import { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import styled from "styled-components/native";
+
+export function FlatListScreen() {
+  const [dataPage, setDataPage] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const llamarData = (page) => {
+    return Array.from({ length: 20 }).map((_, i) => ({
+      product: `Producto ${i + 1 + (page - 1) * 20}`,
+      price: `S/.${(Math.random() * 100).toFixed(2)}`,
+    }));
+  };
+
+  const cargarData = () => {
+    if (loading) return;
+    setLoading(true);
+    setTimeout(() => {
+      const newData = llamarData(page);
+      setDataPage([...dataPage, ...newData]);
+      setPage(page + 1);
+      setLoading(false);
+    }, 1500);
+  };
+
+  useEffect(() => {
+    cargarData();
+  });
+
+  const renderItem = ({ item }) => (
+    <Item>
+      <Text>{item.product}</Text>
+      <Text>{item.price}</Text>
+    </Item>
+  );
+
+  return (
+    <Contenedor>
+      <Title>FLat List (Load)</Title>
+      <FlatList
+        data={dataPage}
+        renderItem={renderItem}
+        onEndReached={cargarData}
+        onEndReachedThreshold={0.8}
+        ListFooterComponent={() =>
+          loading ? <ActivityIndicator size="large" color="#000" /> : null
+        }
+        keyExtractor={(item) => item.product}
+      />
+    </Contenedor>
+  );
+}
 ```

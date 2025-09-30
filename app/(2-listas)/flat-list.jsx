@@ -1,8 +1,13 @@
-import { FlatList } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
 export function FlatListScreen() {
+  const [dataPage, setDataPage] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+
   const data = [
     { product: "Cervesa", price: "S/.10.00" },
     { product: "Papas", price: "S/.5.00" },
@@ -16,6 +21,34 @@ export function FlatListScreen() {
     { product: "Chicha Morada", price: "S/.6.00" },
   ];
 
+  const llamarData = (page) => {
+    return Array.from({ length: 20 }).map((_, i) => ({
+      product: `Producto ${i + 1 + (page - 1) * 20}`,
+      price: `S/.${(Math.random() * 100).toFixed(2)}`,
+    }));
+  };
+
+  const cargarData = () => {
+    if (loading) return;
+    setLoading(true);
+    setTimeout(() => {
+      const newData = llamarData(page);
+      setDataPage([...dataPage, ...newData]);
+      setPage(page + 1);
+      setLoading(false);
+    }, 1500);
+  };
+
+  useEffect(() => {
+    cargarData();
+  });
+
+  const dataExtensa = Array.from({ length: 1000 }).map((_, i) => ({
+    product: `Producto ${i + 1}`,
+    price: `S/.${(Math.random() * 100).toFixed(2)}`,
+  }));
+  data.push(...dataExtensa);
+
   const renderItem = ({ item }) => (
     <Item>
       <Text>{item.product}</Text>
@@ -25,10 +58,15 @@ export function FlatListScreen() {
 
   return (
     <Contenedor>
-      <Title>FLat List</Title>
+      <Title>FLat List (Load)</Title>
       <FlatList
-        data={data}
+        data={dataPage}
         renderItem={renderItem}
+        onEndReached={cargarData}
+        onEndReachedThreshold={0.8}
+        ListFooterComponent={() =>
+          loading ? <ActivityIndicator size="large" color="#000" /> : null
+        }
         keyExtractor={(item) => item.product}
       />
     </Contenedor>
