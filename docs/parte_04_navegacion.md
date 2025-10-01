@@ -86,3 +86,44 @@ export default function Layout() {
   );
 }
 ```
+
+## Fetch Api
+
+Se uso rest clietn extention para las pruebas de los endpoint https://www.youtube.com/watch?v=xDe4qYjU314
+
+Se usara una api de https://free-apis.github.io/#/
+Ojo con la propiedade s de response
+
+```jsx
+import { useEffect, useState } from "react";
+...
+
+export default function Index() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("https://emojihub.yurace.pro/api/all")
+      .then((response) => {
+        if (!response.ok) {
+          setData([{ name: "Error" }]);
+          throw new Error("Error en request");
+        } else {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        setData(data);
+      });
+  }, []);
+
+  return (
+    <Contenedor>
+      <Texto>Componente Fetch</Texto>
+      {data?.map((item, index) => (
+        <Texto key={index}>{item.name}</Texto>
+      ))}
+    </Contenedor>
+  );
+}
+...
+```
