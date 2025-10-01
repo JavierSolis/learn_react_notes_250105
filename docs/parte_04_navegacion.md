@@ -89,6 +89,8 @@ export default function Layout() {
 
 ## Fetch Api
 
+### fecth
+
 Se uso rest clietn extention para las pruebas de los endpoint https://www.youtube.com/watch?v=xDe4qYjU314
 
 Se usara una api de https://free-apis.github.io/#/
@@ -114,6 +116,8 @@ export default function Index() {
       .then((data) => {
         setData(data);
       });
+
+   axios.get("").then(response)
   }, []);
 
   return (
@@ -126,4 +130,20 @@ export default function Index() {
   );
 }
 ...
+```
+
+### Axios
+
+instalar
+
+```shell
+npm i axios
+```
+
+reemplazar fetch por axios
+
+```jsx
+axios.get("https://emojihub.yurace.pro/api/all").then((response) => {
+  setData(response.data);
+});
 ```

@@ -5,6 +5,7 @@ export default function Index() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    /**
     fetch("https://emojihub.yurace.pro/api/all")
       .then((response) => {
         if (!response.ok) {
@@ -17,7 +18,10 @@ export default function Index() {
       })
       .then((data) => {
         setData(data);
-      });
+      });*/
+    axios.get("https://emojihub.yurace.pro/api/all").then((response) => {
+      setData(response.data);
+    });
   }, []);
 
   return (
