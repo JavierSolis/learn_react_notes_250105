@@ -6,12 +6,11 @@ import styled from "styled-components/native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Componente() {
+export default function IndexTab() {
   const route = useRouter();
   const dataRutas = [
-    { key: 1, name: "(1-Conversor)", href: "/(1-conversor)" },
-    { key: 2, name: "(2-Listas)", href: "/(2-listas)" },
-    { key: 3, name: "(3-Navegación)", href: "/(3-navegacion)" },
+    { key: 1, name: "(Tabs)", href: "/(tabs)" },
+    { key: 2, name: "(Drawer)", href: "/(drawer)" },
   ];
 
   const renderItem = ({ item }) => {
@@ -30,7 +29,7 @@ export default function Componente() {
   return (
     <RootArea edges={["top", "left", "right"]}>
       <StatusBar style="dark" />
-      <Title>Menú</Title>
+      <Title>Menú Navegación</Title>
       <Lista
         data={dataRutas}
         renderItem={renderItem}
