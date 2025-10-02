@@ -1,22 +1,13 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components/native";
-export default function Index() {
+export default function AxiosScreen() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("https://emojihub.yurace.pro/api/all")
-      .then((response) => {
-        if (!response.ok) {
-          setData([{ name: "Error" }]);
-          throw new Error("Error en request");
-        } else {
-          //setData(response.data);
-          return response.json();
-        }
-      })
-      .then((data) => {
-        setData(data);
-      });
+    axios.get("https://emojihub.yurace.pro/api/all").then((response) => {
+      setData(response.data);
+    });
   }, []);
 
   return (

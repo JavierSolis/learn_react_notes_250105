@@ -5,7 +5,6 @@ import styled from "styled-components/native";
 
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 export default function Componente() {
   const route = useRouter();
   const dataRutas = [
@@ -31,7 +30,7 @@ export default function Componente() {
   return (
     <RootArea edges={["top", "left", "right"]}>
       <StatusBar style="dark" />
-      <Title>Menú</Title>
+      <Title>Menú (Test - Sin Debug)</Title>
       <Lista
         data={dataRutas}
         renderItem={renderItem}
