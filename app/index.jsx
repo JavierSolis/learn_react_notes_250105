@@ -12,6 +12,7 @@ export default function Componente() {
     { key: 2, name: "(2-Listas)", href: "/(2-listas)" },
     { key: 3, name: "(3-Navegación)", href: "/(3-navegacion)" },
     { key: 4, name: "(4-Fetch)", href: "/(4-fetch)" },
+    { key: 5, name: "(5-Pokedex)", href: "/(5-pokedex)" },
   ];
 
   const renderItem = ({ item }) => {
