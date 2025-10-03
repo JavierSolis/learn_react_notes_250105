@@ -1,12 +1,13 @@
 <div>
-	<h1>Notas del Curso React Native (Serie de 4 Partes)</h1>
+	<h1>Notas del Curso React Native (Serie de 5 Partes)</h1>
 	<p>
-		<img alt="Licencia" src="https://img.shields.io/badge/license-MIT-green" />
-		<img alt="Estado" src="https://img.shields.io/badge/avance-parte%2003-blue" />
-		<img alt="React Native" src="https://img.shields.io/badge/react--native-expo-blue" />
-		<img alt="Tipo" src="https://img.shields.io/badge/docs-notas-informational" />
-	</p>
-	<p>Registro estructurado de prácticas basadas en una serie de videos de YouTube sobre la creación de una app con React Native y Expo.</p>
+    	<img alt="Licencia" src="https://img.shields.io/badge/license-MIT-green" />
+		<img alt="Estado" src="https://img.shields.io/badge/avance-parte%2004-blue" />
+    	<img alt="React Native" src="https://img.shields.io/badge/react--native-expo-blue" />
+    	<img alt="Tipo" src="https://img.shields.io/badge/docs-notas-informational" />
+    </p>
+    <p>Registro estructurado de prácticas basadas en una serie de videos de YouTube sobre la creación de una app con React Native y Expo.</p>
+
 </div>
 
 ---
@@ -35,14 +36,38 @@ Cada parte tiene su archivo en `docs/`. Los commits reflejan la evolución de ca
 | 02    | [Parte 02 – Proyecto conversor](docs/parte_02_proyecto_conversor.md) | Agrupar rutas con Expo Router, snippet VSCode, imagen remota, input + lógica conversor                                                                                    |
 | 03    | [Parte 03 – Listas](docs/parte_03_listas.md)                         | FlatList, SectionList, href vs grupos, styled en no nativos, Vector Icons, Safe Area, estado dinámico, desestructuración, inyección de componentes, gradients, paginación |
 | 04    | [Parte 04 – Navegación](docs/parte_04_navegacion.md)                 | Tabs, Drawer, Fetch API, Axios, TanStack Query, React Query DevTools                                                                                                      |
+| 05    | _(próximamente)_                                                     | -                                                                                                                                                                         |
 
-> Documentación completa de las 4 partes del curso.
+> La parte 5 se añadirá conforme avance el estudio.
 
 ---
 
 ## Referencias
 
+### Video Principal
+
 - Video base: https://www.youtube.com/watch?v=GaXEzkDs6Yk
+
+### Herramientas y Utilidades
+
 - Generador de snippets: https://snippet-generator.app/
 - Hosting rápido de imágenes (para pruebas): https://imgbb.com/
+- REST Client extension (tutorial): https://www.youtube.com/watch?v=xDe4qYjU314
+- Íconos Expo: https://icons.expo.fyi/Index
+
+### Documentación Oficial
+
 - Documentación Expo Router (layouts y grupos): https://expo.github.io/router/docs
+- Documentación Expo Drawer: https://docs.expo.dev/router/advanced/drawer/
+- React Native FlatList: https://reactnative.dev/docs/flatlist
+- TanStack Query: https://tanstack.com/
+
+### APIs y Recursos
+
+- Free APIs (listado): https://free-apis.github.io/#/
+- Emoji API (usada en ejemplos): https://emojihub.yurace.pro/api/all
+
+### Desarrollo y Setup
+
+- NVM (Node Version Manager): https://github.com/nvm-sh/nvm#installing-and-updating
+- Guía CSS Flexbox: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
