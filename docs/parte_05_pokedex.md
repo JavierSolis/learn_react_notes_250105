@@ -16,7 +16,7 @@ Inicia en: https://youtu.be/GaXEzkDs6Yk?t=20353
 
 ## Api
 
-Se esta usando , se creo el rchivo pokedex.http para las pruebas
+Se esta usando https://pokeapi.co/ , se creo el rchivo pokedex.http para las pruebas
 
 ```http
 GET https://pokeapi.co/api/v2/pokemon/?limit=100
