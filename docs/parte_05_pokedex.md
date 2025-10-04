@@ -1,4 +1,4 @@
-# Parte 05 — Pokéde## 1. Inicia en
+# Parte 05 — Pokédex
 
 1. [Inicia en](#1-inicia-en)
 2. [Mockup](#2-mockup)
