@@ -1,5 +1,5 @@
 import { Button } from "@react-navigation/elements";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { StatusBar } from "expo-status-bar";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 async function fetchPokemons() {
   const pokemonMasterList = await axios
-    .get("https://pokeapi.co/api/v2/pokemon/?limit=100")
+    .get("https://pokeapi.co/api/v2/pokemon/?limit=5")
     .then((response) => response.data);
 
   const detailPokemonsPromises = pokemonMasterList.results.map(
@@ -28,10 +28,12 @@ async function fetchPokemons() {
     }
   );
 
-  return await Promise.all(detailPokemonsPromises);
+  const resultAllPokemomWhitDetails = await Promise.all(detailPokemonsPromises);
+  return { results: resultAllPokemomWhitDetails };
 }
 
 export default function Index() {
+  /**
   const {
     data = [],
     isPending,
@@ -41,6 +43,23 @@ export default function Index() {
   } = useQuery({
     queryKey: ["pokemons"],
     queryFn: fetchPokemons,
+  });
+  */
+  const {
+    data = [],
+    isPending,
+    error,
+    refetch,
+    isError,
+    fetchNextPage, //indica la funcion para cargar la siguiente pagina
+    hasNextPage, //indica si hay mas paginas
+    isFetchingNextPage, //indica si se esta cargando la siguiente pagina
+  } = useInfiniteQuery({
+    staleTime: 0,
+    gcTime: 0,
+    queryKey: ["pokemons"],
+    queryFn: fetchPokemons,
+    getNextPageParam: (p) => p.next || undefined,
   });
 
   const renderContent = () => {
@@ -65,11 +84,16 @@ export default function Index() {
         </View>
       );
     }
-    console.log("✅ Pokémons cargados:", data.length);
+
+    console.log("✅ Pokémons cargados: ", data.length);
+    console.log(JSON.stringify(data, null, 2));
+    const allPokemonData = data?.pages?.flatMap((page) => page.results) ?? [];
+    //console.log("✅ Pokémons cargados: ", allPokemonData.length);
+    //console.log(JSON.stringify(allPokemonData, null, 2));
     return (
       <BodyPokemons>
         <FlatList
-          data={data}
+          data={allPokemonData}
           keyExtractor={(item) => item.name}
           renderItem={({ item, index }) => (
             <Text>

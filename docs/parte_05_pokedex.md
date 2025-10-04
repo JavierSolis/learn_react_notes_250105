@@ -139,3 +139,71 @@ async function fetchPokemons() {
 }
 ...
 ```
+
+## Carga de pokemon infinito
+
+- La idea es poder scrolear hasta cargar todos lso pokemon
+
+- Primer acercamiento, se usa useuqryInifinite, declara las varuables nuevas
+- se agregla configracion de cache 0 para poder probar mejor la pantalla
+- al usar querinifnite la estructura que retorna cambia, notar que se debe agregar "resutlts" ya que es parte de la estructura que espera
+
+```jsx
+import { useInfiniteQuery } from "@tanstack/react-query";
+...
+async function fetchPokemons() {
+  ...OJO
+  return { results: resultAllPokemomWhitDetails };
+}
+
+export default function Index() {
+  /**
+  const {
+    data = [],
+    isPending,
+    error,
+    refetch,
+    isError,
+  } = useQuery({
+    queryKey: ["pokemons"],
+    queryFn: fetchPokemons,
+  });
+  */
+  const {
+    data = [],
+    isPending,
+    error,
+    refetch,
+    isError,
+    fetchNextPage, //indica la funcion para cargar la siguiente pagina
+    hasNextPage, //indica si hay mas paginas
+    isFetchingNextPage, //indica si se esta cargando la siguiente pagina
+  } = useInfiniteQuery({
+    staleTime: 0,
+    gcTime: 0,
+    queryKey: ["pokemons"],
+    queryFn: fetchPokemons,
+    getNextPageParam: (p) => p.next || undefined,
+  });
+
+  const renderContent = () => {
+    ...
+    console.log("✅ Pokémons cargados: ", data.length);
+    console.log(JSON.stringify(data, null, 2));//se ve "pages" en su estructura
+    const allPokemonData = data?.pages?.flatMap((page) => page.results) ?? [];
+    console.log("✅ Pokémons cargados: ", allPokemonData.length);
+    console.log(JSON.stringify(allPokemonData, null, 2));
+    return (
+      <BodyPokemons>
+        <FlatList
+          data={allPokemonData}
+          ...
+          >
+        </FlatList>
+      </BodyPokemons>
+    );
+  };
+  ...
+}
+...
+```
