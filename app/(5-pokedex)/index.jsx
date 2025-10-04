@@ -23,10 +23,12 @@ async function fetchPokemons() {
         name: pokemonMaster.name,
         id: detailsByPokemon.id,
         url: pokemonMaster.url,
-        image: detailsByPokemon.sprites.front_default,
-        types: detailsByPokemon.types
-          .map((typeInfo) => typeInfo.type.name)
-          .join(", "),
+        //image: detailsByPokemon.sprites.front_default,
+        image:
+          detailsByPokemon.sprites.other.showdown.front_default ||
+          detailsByPokemon.sprites.front_default,
+        types: detailsByPokemon.types.map((typeInfo) => typeInfo.type.name),
+        //.join(", "),//lo obtendremos como array
       };
     }
   );
@@ -123,11 +125,7 @@ const ErrorText = styled.Text`
 
 const BodyPokemons = styled.View`
   flex: 1;
-  padding: 10px;
-  margin-top: 20px;
-  background-color: #fff;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  margin-top: 8px;
 `;
 const Contenedor = styled(SafeAreaView)`
   flex: 1;
