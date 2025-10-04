@@ -5,9 +5,12 @@ import { StatusBar } from "expo-status-bar";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
+
+import { PokemonCard } from "../../components/5-pokedex-components/PokemonCard";
+
 async function fetchPokemons() {
   const pokemonMasterList = await axios
-    .get("https://pokeapi.co/api/v2/pokemon/?limit=5")
+    .get("https://pokeapi.co/api/v2/pokemon/?limit=10")
     .then((response) => response.data);
 
   const detailPokemonsPromises = pokemonMasterList.results.map(
@@ -93,13 +96,10 @@ export default function Index() {
     return (
       <BodyPokemons>
         <FlatList
+          numColumns={2}
           data={allPokemonData}
           keyExtractor={(item) => item.name}
-          renderItem={({ item, index }) => (
-            <Text>
-              {index + 1}. {item.name} . {item.types}
-            </Text>
-          )}
+          renderItem={({ item, index }) => <PokemonCard pokemon={item} />}
         />
       </BodyPokemons>
     );

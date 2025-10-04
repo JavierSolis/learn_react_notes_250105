@@ -207,3 +207,42 @@ export default function Index() {
 }
 ...
 ```
+
+## Card de pokemon como componte
+
+en pokemon card se crea en lac arepta componente, con pokemon commoparematro
+
+```jsx
+import styled from "styled-components/native";
+
+export function PokemonCard({ pokemon }) {
+  return (
+    <Contenedor>
+      <Texto>{pokemon.name}</Texto>
+    </Contenedor>
+  );
+}
+...
+```
+
+OJO : en idnex se importa, si es default es sin llaves al iomprotar si solo export dsindefatul si se importa con llaves esto sirve cuando se tiene multimple export en un solo archivo
+
+```jsx
+...
+import { PokemonCard } from "../../components/5-pokedex-components/PokemonCard";
+...
+export default function Index() {
+  ...
+  return (
+      <BodyPokemons>
+        <FlatList
+          ...
+          renderItem={({ item, index }) => <PokemonCard pokemon={item} />}
+        />
+      </BodyPokemons>
+    );
+  };
+  ...
+}
+...
+```
