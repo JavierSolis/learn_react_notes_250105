@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import styled from "styled-components/native";
 
 export function PokemonCard({ pokemon }) {
@@ -25,7 +26,17 @@ export function PokemonCard({ pokemon }) {
   const backgroundColor = POKEMON_TYPE_COLORS[primaryType] || "#000";
 
   return (
-    <Contenedor backgroundColor={backgroundColor}>
+    <Contenedor
+      backgroundColor={backgroundColor}
+      onPress={() =>
+        router.push({
+          pathname: "detail",
+          params: {
+            item: JSON.stringify(pokemon),
+          },
+        })
+      }
+    >
       <PokemonImage source={{ uri: pokemon.image }} />
       <PokemonID>#{(pokemon.id + "").padStart(3, 0)}</PokemonID>
       <PokemonName>{pokemon.name}</PokemonName>
@@ -33,7 +44,7 @@ export function PokemonCard({ pokemon }) {
   );
 }
 
-const Contenedor = styled.View`
+const Contenedor = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;

@@ -378,3 +378,53 @@ const PokemonName = styled.Text`
 ```
 
 ![pokemon card](images/pokemon_card.png)
+
+# Detail Pokemon
+
+## Basico enviar parametro a otra pantalla
+
+- Se usa ,as `prìuedade del push, patchname y params, pero no se pued epsar el objeo como tal, sino en json
+
+```jsx
+import { router } from "expo-router";
+
+export function PokemonCard({ pokemon }) {
+  return (
+    <Contenedor
+      backgroundColor={backgroundColor}
+      onPress={() =>
+        router.push({
+          pathname: "detail",
+          params: {
+            item: JSON.stringify(pokemon),
+          },
+        })
+      }
+    >
+      ...
+    </Contenedor>
+  );
+}
+
+const Contenedor = styled.TouchableOpacity`
+...
+`;
+```
+
+- y al recibirlo usar useLocalSeachParams para obtenerllo y deserialiozarlo
+
+```jsx
+import { useLocalSearchParams } from "expo-router";
+import styled from "styled-components/native";
+
+export default function DetailScreen() {
+  const { item } = useLocalSearchParams();
+  const pokemon = JSON.parse(item);
+
+  return (
+    <Contenedor>
+      <Texto>Componente DEtail {pokemon.name}</Texto>
+    </Contenedor>
+  );
+}
+```
