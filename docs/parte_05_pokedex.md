@@ -1,30 +1,39 @@
-# Parte 05 — Pokedex
+# Parte 05 — Pokéde## 1. Inicia en
 
-**Índice**
+1. [Inicia en](#1-inicia-en)
+2. [Mockup](#2-mockup)
+3. [API](#3-api)
+4. [Carga de pokémons usando TanStack](#4-carga-de-pokémons-usando-tanstack)
+5. [Carga de pokémon con más información](#5-carga-de-pokémon-con-más-información)
+6. [Carga de pokémon infinita](#6-carga-de-pokémon-infinita)
+   - 6.1. [Acercamiento inicial](#61-acercamiento-inicial)
+   - 6.2. [Ajustes para completar la carga paginada](#62-ajustes-para-completar-la-carga-paginada)
+7. [Card de pokémon como componente](#7-card-de-pokémon-como-componente)
+8. [PokéCard](#8-pokécard)
+9. [Detail Pokémon](#9-detail-pokémon)
+   - 9.1. [Básico enviar parámetro a otra pantalla](#91-básico-enviar-parámetro-a-otra-pantalla)
+   - 9.2. [Creación de diseño](#92-creación-de-diseño)
+   - 9.3. [Detalles finales según el mock](#93-detalles-finales-según-el-mock)
 
-<!-- Índice actualizado -->
-
-1. [Inicia en](#inicia-en)
-
-## Inicia en
+## 1. Inicia en
 
 Inicia en: https://youtu.be/GaXEzkDs6Yk?t=20353
 
-## Mockup
+## 2. Mockup
 
-![mockup pokedex](images/pokedex_mockup.png)
+![mockup pokédx](images/pokedex_mockup.png)
 
-## Api
+## 3. API
 
-Se esta usando https://pokeapi.co/ , se creo el rchivo pokedex.http para las pruebas
+Se está usando https://pokeapi.co/, se creó el archivo pokedex.http para las pruebas
 
 ```http
 GET https://pokeapi.co/api/v2/pokemon/?limit=10
 ```
 
-## Carga de pokemons usan tanstack
+## 4. Carga de pokémons usando TanStack
 
-**_TIP: queryKey es el alias que usara para guardar en cache_**
+**_TIP: queryKey es el alias que usará para guardar en caché_**
 
 ```jsx
 import { useQuery } from "@tanstack/react-query";
@@ -104,11 +113,11 @@ export default function Index() {
 ...
 ```
 
-## Carga de pokemon con mas info
+## 5. Carga de pokémon con más información
 
-- En este caso se hizo un get adicional por cada pokemon para obtener su tip y mas datos ya que no venia en la lista maestra
-- Se uso algo nuevo Promise.all para esperar todos los async de map, si no se usa asi es una lista de promesas
-- Los map se ejecutan en paralelo por lo cual el orden se mantiene al espear todas las promesas
+- En este caso se hizo un GET adicional por cada pokémon para obtener su tipo y más datos ya que no venía en la lista maestra
+- Se usó algo nuevo Promise.all para esperar todos los async de map, si no se usa así es una lista de promesas
+- Los map se ejecutan en paralelo por lo cual el orden se mantiene al esperar todas las promesas
 
 ```jsx
 ...
@@ -140,23 +149,28 @@ async function fetchPokemons() {
 ...
 ```
 
-## Carga de pokemon infinito
+## 6. Carga de pokémon infinita
 
-- La idea es poder scrolear hasta cargar todos lso pokemon
+- La idea es poder hacer scroll hasta cargar todos los pokémon
 
-### Acercamiento inicial
+### 6.1. Acercamiento inicial
 
-- Primer acercamiento, se usa useuqryInifinite, declara las varuables nuevas
-- se agregla configracion de cache 0 para poder probar mejor la pantalla
-- al usar querinifnite la estructura que retorna cambia, notar que se debe agregar "resutlts" ya que es parte de la estructura que espera
+- Primer acercamiento, se usa useInfiniteQuery, declara las variables nuevas
+- Se agrega configuración de caché 0 para poder probar mejor la pantalla
+- Al usar queryInfinite la estructura que retorna cambia, notar que se debe agregar "results" ya que es parte de la estructura que espera
 
 ```jsx
 import { useInfiniteQuery } from "@tanstack/react-query";
+```
+
+```jsx
 ...
 async function fetchPokemons() {
   ...OJO
   return { results: resultAllPokemomWhitDetails };
 }
+
+
 
 export default function Index() {
   /**
@@ -210,11 +224,11 @@ export default function Index() {
 ...
 ```
 
-### Ajustes para completar la carga paginada
+### 6.2. Ajustes para completar la carga paginada
 
-- En flat List usamos el endReach para poder indicarle que hacer si llega al final ( similar a como hicimos en la seccion de Listas)
-- Y usamos su propiueadde de ListFooterComponetne para mostra un indicador cuando carga
-- Ambos casos usamos los datos que nos da queryinintie 'hasnextPage y isFetchinNextPage'
+- En FlatList usamos el onEndReached para poder indicarle qué hacer si llega al final (similar a como hicimos en la sección de Listas)
+- Y usamos su propiedad de ListFooterComponent para mostrar un indicador cuando carga
+- En ambos casos usamos los datos que nos da queryInfinite 'hasNextPage e isFetchingNextPage'
 
 ```jsx
 <FlatList
@@ -233,8 +247,8 @@ export default function Index() {
 />
 ```
 
-- En la funcion fetchPokemons agregamos el aprametro pageParam, que es el parametro que usara queryInite para pasar la siguiente pagina
-- ademas para que sepa que pagina llamar, en el resultado agregamos el resultado inicial donde estaba los metada datos de next page , esto lo usara userquerinite para hacer syu logica de llamar a la siguiente apgina hasta terminar
+- En la función fetchPokemons agregamos el parámetro pageParam, que es el parámetro que usará useInfiniteQuery para pasar la siguiente página
+- Además para que sepa qué página llamar, en el resultado agregamos el resultado inicial donde estaba los metadatos de next page, esto lo usará useInfiniteQuery para hacer su lógica de llamar a la siguiente página hasta terminar
 
 ```jsx
 async function fetchPokemons({pageParam="https://pokeapi.co/api/v2/pokemon/?limit=10"}) {
@@ -247,9 +261,9 @@ async function fetchPokemons({pageParam="https://pokeapi.co/api/v2/pokemon/?limi
 }
 ```
 
-## Card de pokemon como componte
+## 7. Card de pokémon como componente
 
-en pokemon card se crea en lac arepta componente, con pokemon commoparematro
+En PokemonCard se crea en la carpeta componente, con pokémon como parámetro
 
 ```jsx
 import styled from "styled-components/native";
@@ -264,7 +278,7 @@ export function PokemonCard({ pokemon }) {
 ...
 ```
 
-OJO : en idnex se importa, si es default es sin llaves al iomprotar si solo export dsindefatul si se importa con llaves esto sirve cuando se tiene multimple export en un solo archivo
+**OJO:** en index se importa, si es default es sin llaves al importar, si es solo export sin default se importa con llaves, esto sirve cuando se tiene múltiples exports en un solo archivo
 
 ```jsx
 ...
@@ -286,15 +300,16 @@ export default function Index() {
 ...
 ```
 
-## PokeCard
+## 8. PokéCard
 
-Se realizo ajustes para que se parezca mas al mockup, apuntes:
+Se realizaron ajustes para que se parezca más al mockup, apuntes:
 
 - Se usa image gif si existe
-- se usa un lsitado de colors por typo, se cambio para noc oncatenarlo sino que lo mape como lista
-- se ajusto la iamgen para que se ajuste al gif
-- Se ajusto lso marign, ver bien el absoute y relative de cada uno
-- para imagens niamdas se vio que existia el libreria expo-image con mejor performance
+- Se usa un listado de colores por tipo, se cambió para no concatenarlo sino que se mapeó como lista
+
+- Se ajustó la imagen para que se ajuste al gif
+- Se ajustaron los márgenes, ver bien el absolute y relative de cada uno
+- Para imágenes animadas se vio que existía la librería expo-image con mejor performance
 
 ```jsx
 import styled from "styled-components/native";
@@ -327,6 +342,7 @@ export function PokemonCard({ pokemon }) {
     <Contenedor backgroundColor={backgroundColor}>
       <PokemonImage source={{ uri: pokemon.image }} />
       <PokemonID>#{(pokemon.id + "").padStart(3, 0)}</PokemonID>
+
       <PokemonName>{pokemon.name}</PokemonName>
     </Contenedor>
   );
@@ -379,11 +395,11 @@ const PokemonName = styled.Text`
 
 ![pokemon card](images/pokemon_card.png)
 
-## Detail Pokemon
+## 9. Detail Pokémon
 
-### Basico enviar parametro a otra pantalla
+### 9.1. Básico enviar parámetro a otra pantalla
 
-- Se usa ,as `prìuedade del push, patchname y params, pero no se pued epsar el objeo como tal, sino en json
+- Se usa más propiedades del push, pathname y params, pero no se puede pasar el objeto como tal, sino en JSON
 
 ```jsx
 import { router } from "expo-router";
@@ -411,7 +427,7 @@ const Contenedor = styled.TouchableOpacity`
 `;
 ```
 
-- y al recibirlo usar useLocalSeachParams para obtenerllo y deserialiozarlo
+- Y al recibirlo usar useLocalSearchParams para obtenerlo y deserializarlo
 
 ```jsx
 import { useLocalSearchParams } from "expo-router";
@@ -429,12 +445,22 @@ export default function DetailScreen() {
 }
 ```
 
-### Creación de diseño
+### 9.2. Creación de diseño
 
-EN el video se presenta una mockup, que lo veo psible con lo enseñado, para probar algunas cosas adicionales, tratare de hacer este diseño,
+En el video se presenta un mockup, que lo veo posible con lo enseñado, para probar algunas cosas adicionales, trataré de hacer este diseño:
 
 Fuente: https://dribbble.com/shots/19202307-Pokedex-Pokemon-App
 
 Figma: https://www.figma.com/design/zqFEwQGEbrIcAff6nyhzW7/Untitled?node-id=1-23&t=cAhhkpnerbtVDTj1-0
 
 ![mockup detail pokedex](images/pokedex_detail_mockup.gif)
+
+### 9.3. Detalles finales según el mock
+
+![lista pokémons](images/pokedex_main.png)
+
+![detalle pokémon 1](images/pokedex_pokemon_1.png)
+
+![detalle pokémon 2](images/pokedex_pokemon_2.png)
+
+:)
