@@ -154,7 +154,7 @@ const Header = styled.View`
 `;
 
 const ImageUser = styled.Image.attrs({
-  source: require("./../../assets/images/pokedex_profile_pokemon.jpg"),
+  source: require("../../assets/images/pokedex/pokedex_profile_pokemon.jpg"),
 })`
   width: 100px;
   height: 100px;
@@ -171,7 +171,7 @@ const Title = styled.Text`
 `;
 
 const ImagenFondo = styled.Image.attrs({
-  source: require("./../../assets/images/pokedex_bg_pokebola.png"),
+  source: require("./../../assets/images/pokedex/pokedex_bg_pokebola.png"),
 })`
   position: absolute;
   width: 300px;

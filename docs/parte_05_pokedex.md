@@ -379,9 +379,9 @@ const PokemonName = styled.Text`
 
 ![pokemon card](images/pokemon_card.png)
 
-# Detail Pokemon
+## Detail Pokemon
 
-## Basico enviar parametro a otra pantalla
+### Basico enviar parametro a otra pantalla
 
 - Se usa ,as `prìuedade del push, patchname y params, pero no se pued epsar el objeo como tal, sino en json
 
@@ -428,3 +428,13 @@ export default function DetailScreen() {
   );
 }
 ```
+
+### Creación de diseño
+
+EN el video se presenta una mockup, que lo veo psible con lo enseñado, para probar algunas cosas adicionales, tratare de hacer este diseño,
+
+Fuente: https://dribbble.com/shots/19202307-Pokedex-Pokemon-App
+
+Figma: https://www.figma.com/design/zqFEwQGEbrIcAff6nyhzW7/Untitled?node-id=1-23&t=cAhhkpnerbtVDTj1-0
+
+![mockup detail pokedex](images/pokedex_detail_mockup.gif)

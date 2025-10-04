@@ -1,7 +1,8 @@
 import { router } from "expo-router";
 import styled from "styled-components/native";
-
+import { getColorByType } from "../../app/constants/type_colors";
 export function PokemonCard({ pokemon }) {
+  /*
   const POKEMON_TYPE_COLORS = {
     normal: "#A4ACAF",
     fire: "#FD7D24",
@@ -24,10 +25,10 @@ export function PokemonCard({ pokemon }) {
   };
   const primaryType = pokemon.types[0];
   const backgroundColor = POKEMON_TYPE_COLORS[primaryType] || "#000";
-
+ */
   return (
     <Contenedor
-      backgroundColor={backgroundColor}
+      backgroundColor={getColorByType(pokemon.types[0])}
       onPress={() =>
         router.push({
           pathname: "detail",
