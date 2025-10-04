@@ -144,6 +144,8 @@ async function fetchPokemons() {
 
 - La idea es poder scrolear hasta cargar todos lso pokemon
 
+### Acercamiento inicial
+
 - Primer acercamiento, se usa useuqryInifinite, declara las varuables nuevas
 - se agregla configracion de cache 0 para poder probar mejor la pantalla
 - al usar querinifnite la estructura que retorna cambia, notar que se debe agregar "resutlts" ya que es parte de la estructura que espera
@@ -206,6 +208,43 @@ export default function Index() {
   ...
 }
 ...
+```
+
+### Ajustes para completar la carga paginada
+
+- En flat List usamos el endReach para poder indicarle que hacer si llega al final ( similar a como hicimos en la seccion de Listas)
+- Y usamos su propiueadde de ListFooterComponetne para mostra un indicador cuando carga
+- Ambos casos usamos los datos que nos da queryinintie 'hasnextPage y isFetchinNextPage'
+
+```jsx
+<FlatList
+  renderItem={({ item, index }) => <PokemonCard pokemon={item} />}
+  onEndReached={() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      console.log("Cargando siguiente pagina...");
+      fetchNextPage();
+    }
+  }}
+  ListFooterComponent={
+    isFetchingNextPage ? (
+      <ActivityIndicator size="large" color="tomato" />
+    ) : null
+  }
+/>
+```
+
+- En la funcion fetchPokemons agregamos el aprametro pageParam, que es el parametro que usara queryInite para pasar la siguiente pagina
+- ademas para que sepa que pagina llamar, en el resultado agregamos el resultado inicial donde estaba los metada datos de next page , esto lo usara userquerinite para hacer syu logica de llamar a la siguiente apgina hasta terminar
+
+```jsx
+async function fetchPokemons({pageParam="https://pokeapi.co/api/v2/pokemon/?limit=10"}) {
+
+  const pokemonMasterList = await axios
+    .get(pageParam)
+    .then((response) => response.data);
+  ...
+  return { ...pokemonMasterList, results: resultAllPokemomWhitDetails };
+}
 ```
 
 ## Card de pokemon como componte

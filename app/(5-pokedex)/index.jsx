@@ -8,9 +8,11 @@ import styled from "styled-components/native";
 
 import { PokemonCard } from "../../components/5-pokedex-components/PokemonCard";
 
-async function fetchPokemons() {
+async function fetchPokemons({
+  pageParam = "https://pokeapi.co/api/v2/pokemon/?limit=10",
+}) {
   const pokemonMasterList = await axios
-    .get("https://pokeapi.co/api/v2/pokemon/?limit=10")
+    .get(pageParam)
     .then((response) => response.data);
 
   const detailPokemonsPromises = pokemonMasterList.results.map(
@@ -34,7 +36,7 @@ async function fetchPokemons() {
   );
 
   const resultAllPokemomWhitDetails = await Promise.all(detailPokemonsPromises);
-  return { results: resultAllPokemomWhitDetails };
+  return { ...pokemonMasterList, results: resultAllPokemomWhitDetails };
 }
 
 export default function Index() {
@@ -100,8 +102,19 @@ export default function Index() {
         <FlatList
           numColumns={2}
           data={allPokemonData}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item, index) => index + ">" + item.name}
           renderItem={({ item, index }) => <PokemonCard pokemon={item} />}
+          onEndReached={() => {
+            if (hasNextPage && !isFetchingNextPage) {
+              console.log("Cargando siguiente pagina...");
+              fetchNextPage();
+            }
+          }}
+          ListFooterComponent={
+            isFetchingNextPage ? (
+              <ActivityIndicator size="large" color="tomato" />
+            ) : null
+          }
         />
       </BodyPokemons>
     );
